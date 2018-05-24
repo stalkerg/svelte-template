@@ -1,0 +1,17 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+       
+        "modules": false,
+        "debug": false,
+        "useBuiltIns": "usage"
+      }
+    ]
+  ],
+  "plugins": [
+    "transform-runtime",
+    "transform-object-assign"
+  ]
+}

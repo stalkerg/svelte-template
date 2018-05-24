@@ -1,0 +1,44 @@
+{
+    "extends": [
+        "eslint-config-airbnb-base",
+        "eslint-config-airbnb-base/rules/strict"
+    ],
+    "globals": {
+        "document": true
+    },
+    "plugins": [
+        "eslint-plugin-script-tags"
+    ],
+    "rules": {
+        "no-console": 0,
+        "import/no-extraneous-dependencies": [
+            "error",
+            {
+                "devDependencies": true,
+                "optionalDependencies": false,
+                "peerDependencies": false
+            }
+        ],
+        "no-restricted-syntax": [
+            "error",
+            "LabeledStatement",
+            "WithStatement"
+        ],
+        "eol-last": "off"
+    },
+    "env": {
+        "browser": true
+    },
+    "settings": {
+        "import/resolver": {
+            "babel-module": {
+                "root": [
+                    "./src"
+                ],
+                "extensions": [
+                    ".js"
+                ]
+            }
+        }
+    }
+}
