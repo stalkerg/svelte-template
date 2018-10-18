@@ -7,6 +7,7 @@
     "type": "git",
     "url": "https://github.com/stalkerg/svelte-template.git"
   },
+  "description": "Template for new app base on Svelte",
   "devDependencies": {
     "@babel/cli": "^7.1.2",
     "@babel/core": "^7.1.2",
