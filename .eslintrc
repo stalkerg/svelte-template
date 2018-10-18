@@ -36,7 +36,8 @@
                     "./src"
                 ],
                 "extensions": [
-                    ".js"
+                    ".js",
+                    ".mjs",
                 ]
             }
         }

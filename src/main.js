@@ -61,4 +61,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
   stateRouter.evaluateCurrentRoute('app');
 });
-

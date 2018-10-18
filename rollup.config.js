@@ -2,8 +2,8 @@ import svelte from 'rollup-plugin-svelte';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
-import uglify from 'rollup-plugin-uglify';
-import eslint from 'rollup-plugin-eslint';
+import { uglify } from 'rollup-plugin-uglify';
+import { eslint } from 'rollup-plugin-eslint';
 import visualizer from 'rollup-plugin-visualizer';
 import includePaths from 'rollup-plugin-includepaths';
 
@@ -45,6 +45,7 @@ export default {
       cascade: false,
       shared: false,
       hydratable: false,
+      nestedTransitions: false,
     }),
     resolve({
       browser: true,
@@ -53,12 +54,36 @@ export default {
     // If we're building for production (npm run build
     // instead of npm run dev), transpile and minify
     production && babel({
+      babelrc: false,
+      extensions: ['.js', '.jsx', '.es6', '.es', '.mjs', '.html'],
       exclude: [
         'node_modules/core-js/**',
         'node_modules/babel-runtime/**',
+        'node_modules/@babel/runtime/**',
       ],
       runtimeHelpers: true,
-      babelrc: true,
+      presets: [
+        [
+          '@babel/preset-env',
+          {
+            modules: false,
+            debug: false,
+            useBuiltIns: 'usage',
+            shippedProposals: true,
+            forceAllTransforms: true,
+            targets: {
+              browsers: [
+                'last 2 versions',
+                'ie >= 9',
+              ],
+            },
+          },
+        ],
+      ],
+      plugins: [
+        ['@babel/transform-runtime', {}],
+        ['@babel/transform-object-assign', {}],
+      ],
     }),
     production && uglify(),
     // visualizer({
