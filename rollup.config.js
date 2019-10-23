@@ -2,9 +2,8 @@ import svelte from 'rollup-plugin-svelte';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
-import { uglify } from 'rollup-plugin-uglify';
+import { terser } from 'rollup-plugin-terser';
 import { eslint } from 'rollup-plugin-eslint';
-import visualizer from 'rollup-plugin-visualizer';
 import includePaths from 'rollup-plugin-includepaths';
 
 const production = !process.env.ROLLUP_WATCH;
@@ -42,10 +41,8 @@ export default {
         css.write('public/bundle.css');
       },
       // this results in smaller CSS files
-      cascade: false,
       shared: false,
       hydratable: false,
-      nestedTransitions: false,
     }),
     resolve({
       browser: true,
@@ -69,6 +66,7 @@ export default {
             modules: false,
             debug: false,
             useBuiltIns: 'usage',
+            corejs: 2,
             shippedProposals: true,
             forceAllTransforms: true,
             targets: {
@@ -81,13 +79,9 @@ export default {
         ],
       ],
       plugins: [
-        ['@babel/transform-runtime', {}],
-        ['@babel/transform-object-assign', {}],
+        ['@babel/plugin-syntax-dynamic-import', {}],
       ],
     }),
-    production && uglify(),
-    // visualizer({
-    //   sourcemap: false,
-    // }),
+    production && terser(),
   ],
 };

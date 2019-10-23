@@ -4,10 +4,26 @@
         "eslint-config-airbnb-base/rules/strict"
     ],
     "globals": {
-        "document": true
+        "document": true,
+        "com_sbps_system": true
     },
     "plugins": [
-        "eslint-plugin-script-tags"
+        "svelte3"
+    ],
+    "overrides": [
+        {
+            "files": [
+                "**/*.svelte"
+            ],
+            "processor": "svelte3/svelte3",
+            "rules": {
+                "import/first": "off",
+                "import/no-duplicates": "off",
+                "import/no-mutable-exports": "off",
+                "import/no-unresolved": "off",
+                "import/prefer-default-export": "off"
+            }
+        }
     ],
     "rules": {
         "no-console": 0,
@@ -24,7 +40,14 @@
             "LabeledStatement",
             "WithStatement"
         ],
-        "eol-last": "off"
+        "eol-last": "off",
+        "arrow-parens": [
+            2,
+            "as-needed",
+            {
+                "requireForBlockBody": true
+            }
+        ]
     },
     "env": {
         "browser": true
@@ -38,8 +61,16 @@
                 "extensions": [
                     ".js",
                     ".mjs",
+                    ".svelte"
                 ]
             }
         }
+    },
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "sourceType": "module",
+        "allowImportExportEverywhere": false,
+        "codeFrame": false,
+        "ecmaVersion": 2019
     }
 }

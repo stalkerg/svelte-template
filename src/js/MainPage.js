@@ -1,17 +1,12 @@
-import MainPageComponent from 'components/MainPage.html';
+import MainPageComponent from 'components/MainPage.svelte';
 
-function MainPage(stateRouter, store) {
+function MainPage(stateRouter) {
   stateRouter.addState({
     name: 'app',
     route: '/app',
     template: {
       component: MainPageComponent,
-      options: {
-        store,
-        data: { },
-        methods: {
-        },
-      },
+      options: { },
     },
     resolve(data, parameters, cb) {
       cb(null, Object.assign(parameters, {}));

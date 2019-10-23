@@ -5,3 +5,7 @@
     margin-top: 10px;
   }
 </style>
+
+<script>
+  import { _ } from 'global';
+</script>
