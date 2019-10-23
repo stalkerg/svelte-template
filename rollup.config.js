@@ -22,15 +22,22 @@ export default {
   plugins: [
     eslint({
       include: [
-        './src/**.js',
-        './src/**.html',
+        'src/**/*.svelte',
+        'src/**/*.js',
+        'src/**/*.mjs',
       ],
     }),
     includePaths({
       include: {},
       paths: ['src'],
       external: [],
-      extensions: ['.js', '.json', '.html'],
+      extensions: [
+        '.mjs',
+        '.js',
+        '.json',
+        '.html',
+        '.svelte',
+      ],
     }),
     svelte({
       // enable run-time checks when not in production
