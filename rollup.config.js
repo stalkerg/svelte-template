@@ -5,8 +5,27 @@ import babel from 'rollup-plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import { eslint } from 'rollup-plugin-eslint';
 import includePaths from 'rollup-plugin-includepaths';
+import livereload from 'rollup-plugin-livereload';
+import child_process from 'child_process';
 
 const production = !process.env.ROLLUP_WATCH;
+
+function serve() {
+  let started = false;
+
+  return {
+    writeBundle() {
+      if (!started) {
+        started = true;
+
+        child_process.spawn('npm', ['run', 'start', '--', '--dev'], {
+          stdio: ['ignore', 'inherit', 'inherit'],
+          shell: true,
+        });
+      }
+    },
+  };
+}
 
 export default {
   input: 'src/main.js',
@@ -57,7 +76,7 @@ export default {
     commonjs(),
     // If we're building for production (npm run build
     // instead of npm run dev), transpile and minify
-    production && babel({
+    babel({
       babelrc: false,
       extensions: ['.js', '.jsx', '.es6', '.es', '.mjs', '.html'],
       exclude: [
@@ -73,7 +92,7 @@ export default {
             modules: false,
             debug: false,
             useBuiltIns: 'usage',
-            corejs: 2,
+            corejs: 3,
             shippedProposals: true,
             forceAllTransforms: true,
             targets: {
@@ -89,6 +108,13 @@ export default {
         ['@babel/plugin-syntax-dynamic-import', {}],
       ],
     }),
+    // In dev mode, call `npm run start` once
+    // the bundle has been generated
+    !production && serve(),
+
+    // Watch the `public` directory and refresh the
+    // browser on changes when not in production
+    !production && livereload('public'),
     production && terser(),
   ],
 };
