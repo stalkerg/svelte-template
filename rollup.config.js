@@ -78,7 +78,7 @@ export default {
     // instead of npm run dev), transpile and minify
     babel({
       babelrc: false,
-      extensions: ['.js', '.jsx', '.es6', '.es', '.mjs', '.html'],
+      extensions: ['.js', '.jsx', '.es6', '.es', '.mjs', '.html', '.svelte'],
       exclude: [
         'node_modules/core-js/**',
         'node_modules/babel-runtime/**',
