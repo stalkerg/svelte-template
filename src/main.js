@@ -1,12 +1,5 @@
-import 'core-js/es/string/includes';
-import 'core-js/es/symbol';
-import 'core-js/es/symbol/iterator';
-import 'core-js/modules/es.promise.finally';
-import 'core-js/features/object/from-entries';
-import 'whatwg-fetch';
-
 import StateRouter from 'abstract-state-router';
-import SvelteRenderer from 'svelte-state-renderer';
+import SvelteRenderer from 'svelte_asr_render';
 // For HTML5 History routing, but you http server should return index.html instead 404.
 // import SausageRouter from 'sausage-router';
 import HashBrownRouter from 'hash-brown-router';
@@ -30,7 +23,7 @@ language.subscribe((value) => {
 });
 language.set(localStorage.getItem('language') || userLanguage);
 
-document.addEventListener('DOMContentLoaded', () => {
+function init() {
   const stateRouter = StateRouter(
     SvelteRenderer({}),
     document.querySelector('body'),
@@ -50,5 +43,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   MainPage(stateRouter);
 
-  stateRouter.evaluateCurrentRoute('app');
-});
+  stateRouter.evaluateCurrentRoute('app.text');
+}
+
+export default function main() {
+  if (document.readyState !== 'loading') {
+    init();
+  } else {
+    document.addEventListener('DOMContentLoaded', init);
+  }
+}

@@ -3,7 +3,6 @@
 </script>
 
 <div class="card-body">
-  <h5 class="card-title">Special title treatment111</h5>
-  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-  <a href="/#" class="btn btn-primary">Go somewhere</a>
+  <h5 class="card-title">{$_('Text tab')}</h5>
+  <p class="card-text">{$_('Text tab description')}</p>
 </div>

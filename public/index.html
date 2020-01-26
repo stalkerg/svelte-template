@@ -4,10 +4,28 @@
     <meta charset="utf8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Hello World</title>
+    <link href="/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/bundle.css">
   </head>
 
   <body>
-    <script src="/bundle.js"></script>
+    <script>
+      import("/module/main.js").then(function(main) {
+        main.default();
+      });
+      window.supportsDynamicImport = true;
+    </script>
+    <script>
+      if (!window.supportsDynamicImport) {
+        const systemJsLoaderTag = document.createElement('script');
+        systemJsLoaderTag.src = '/s.min.js';
+        systemJsLoaderTag.addEventListener('load', function () {
+          System.import('/nomodule/main.js').then(function(main) {
+            main.default();
+          });
+        }, false);
+        document.head.appendChild(systemJsLoaderTag);
+      }
+    </script>
   </body>
 </html>

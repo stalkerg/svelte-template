@@ -54,7 +54,6 @@
 </script>
 
 <div class="card-body">
-  <h5 class="card-title">{$_('Chart tab')}</h5>
   <p class="card-text">{$_('Chart tab description')}</p>
   <canvas width="400" height="200" bind:this={myChartDom}></canvas>
 </div>
