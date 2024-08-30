@@ -43,7 +43,7 @@
     "rollup-plugin-svelte": "^5.1.1",
     "rollup-plugin-terser": "^5.2.0",
     "sausage-router": "^1.1.2",
-    "svelte": "3.18.0",
+    "svelte": "4.2.19",
     "whatwg-fetch": "^3.0.0"
   },
   "scripts": {
